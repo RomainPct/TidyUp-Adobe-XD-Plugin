@@ -1,0 +1,13 @@
+p.colorRow {
+    border-left: 8px solid red;
+    position: relative;
+    margin-bottom: 16px;
+}
+
+p.colorRow::before {
+    display: none;
+}
+
+p.colorRow:hover {
+    opacity: 1 !important;
+}

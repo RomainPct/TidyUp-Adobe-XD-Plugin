@@ -1,0 +1,35 @@
+.assetsGroup {
+    position: relative;
+}
+
+.assetsGroup > .assetsGroup {
+    margin-bottom: 16px;
+}
+
+.childrenContainer {
+    padding-top: 16px;
+    margin-left: 8px;
+    position: absolute;
+    display: none;
+    top: 100%;
+    left: 0;
+    right: 8px;
+    flex-direction: column-reverse;
+}
+
+.organizerView:hover .assetsGroup:hover,
+.organizerView:hover .assetsGroup:hover .assetsGroup {
+    opacity: 1;
+}
+
+.organizerView:hover .assetsGroup:hover > p.row {
+    border-left: 8px solid #1592E5;
+    background: #DFDFDF;
+}
+.organizerView:hover .assetsGroup:hover > p.row::before {
+    background: #1592E5;
+}
+
+.assetsGroup:hover > .childrenContainer {
+    display: flex;
+}

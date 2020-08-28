@@ -1,0 +1,38 @@
+p.row {
+    display: flex;
+    justify-content: space-between;
+    border-left: 6px solid #E4E4E4;
+    position: relative;
+    padding: 4px 8px 4px 10px;
+    margin: 0;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: #EFEFEF;
+    border-radius: 1px;
+}
+
+p.row:hover {
+    background: #E8E8E8;
+}
+
+p.row::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    z-index: 5;
+    background: #6E6E6E;
+}
+
+p.row span.details {
+    opacity: 0.6;
+    float: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

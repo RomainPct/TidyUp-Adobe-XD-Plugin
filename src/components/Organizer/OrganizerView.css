@@ -1,0 +1,14 @@
+.organizerView {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.organizerView > .assetsGroup,
+.organizerView > .row {
+    margin-bottom: 16px;
+}
+
+.organizerView:hover .assetsGroup,
+.organizerView:hover > .colorRow {
+    opacity: 0.2;
+}
