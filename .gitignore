@@ -1,0 +1,18 @@
+
+#-- os --#
+.DS_Store
+
+#-- ide --#
+.idea
+
+#-- build --#
+dist
+
+#-- node --#
+node_modules
+debug.json
+main.js
+
+#-- tmp --#
+*.log
+tmp.*
