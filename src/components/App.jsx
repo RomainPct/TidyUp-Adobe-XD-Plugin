@@ -2,6 +2,7 @@ const React = require('react')
 const styles = require('./App.css')
 
 const assets = require('assets')
+const { Text } = require('scenegraph')
 const { Group, Color, TextStyle } = require('../utils/AssetModels')
 
 const { NavigationBar } = require('./Nav/NavigationBar')
@@ -66,9 +67,17 @@ class App extends React.Component {
     
     documentStateChanged(selection, documentRoot) {
         console.log(`======> documentStateChanged`)
+        let currentSection
+        if (selection.items.length == 0) {
+            currentSection = 2
+        } else if (selection.items[0] instanceof Text) {
+            currentSection = 1
+        } else {
+            currentSection = 0
+        }
         const colorAssets = this.getOrderedColorAssets()
         const fontStyles = this.getOrderedFontStyles()
-        this.setState({ documentRoot, selection, colorAssets, fontStyles });
+        this.setState({ documentRoot, selection, colorAssets, fontStyles, currentSection })
     }
 
     handleNavigationTo = (index) => {
