@@ -4,6 +4,6 @@
 }
 
 .organizerView:hover .assetsGroup,
-.organizerView:hover .colorRow {
+.organizerView:hover > .colorRow {
     opacity: 0.4;
 }

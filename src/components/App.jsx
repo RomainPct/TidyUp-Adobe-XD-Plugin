@@ -2,7 +2,7 @@ const React = require('react')
 const styles = require('./App.css')
 
 const assets = require('assets')
-const { AssetType } = require('../utils/AssetType')
+const { Group, Color } = require('../utils/AssetModels')
 
 const { NavigationBar } = require('./Nav/NavigationBar')
 const { OrganizerView } = require('./Organizer/OrganizerView')
@@ -24,31 +24,29 @@ class App extends React.Component {
     }
 
     getOrderedColorAssets() {
-        let colorAssets = {
-            type: AssetType.Root,
-            children: {
-                NotNamed: { type: AssetType.Group, children: {} }
-            }
-        }
+        let colorAssets = new Group('Root')
         assets.colors.get().forEach((color) => {
             if (color.name) {
                 const parts = color.name.split('/')
                 let lastGroup = colorAssets
                 for (const i in parts) {
                     if (i == parts.length - 1) {
-                        lastGroup.children[parts[i]] = { type: AssetType.Color, value: color.color.toHex() }
-                    } else {
-                        if (lastGroup.children[parts[i]] === undefined) {
-                            lastGroup.children[parts[i]] = { type: AssetType.Group, children: {} }
+                        console.log(color)
+                        if (color.gradientType) {
+                            // gérer l'ajout d'un gradient
+                        } else {
+                            lastGroup.addChild(new Color(parts[i], color.color.toHex()))
                         }
-                        lastGroup = lastGroup.children[parts[i]]
+                    } else {
+                        lastGroup.addChild(new Group(parts[i]))
+                        lastGroup = lastGroup.getChild(parts[i])
                     }
                 }
             } else {
-                colorAssets.children["NotNamed"]["children"][color.color.toHex()] = { type: AssetType.Color, value: color.color.toHex() }
+                colorAssets.addChild(new Group('NotNamed'))
+                colorAssets.getChild('NotNamed').addChild(new Color(color.color.toHex(), color.color.toHex()))
             }
         })
-
         return colorAssets
     }
     

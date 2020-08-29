@@ -5,6 +5,21 @@ export class Group {
         this.children = []
     }
 
+    addChild(child) {
+        if (this.getChild(child.name) === null) {
+            this.children.push(child)
+        }
+    }
+
+    getChild(name) {
+        for (const child of this.children) {
+            if (child.name == name) {
+                return child
+            }
+        }
+        return null
+    }
+
 }
 
 export class Color {
