@@ -1,7 +1,8 @@
 const React = require('react')
 require('./AssetsGroup.css')
 
-import { Group, Color } from '../../utils/AssetModels'
+import { Group, Color, TextStyle } from '../../utils/AssetModels'
+import { TextStyleRow } from './Rows/TextStyleRow'
 
 const { Row } =  require('./Rows/Row')
 const { ColorRow } =  require('./Rows/ColorRow')
@@ -15,6 +16,7 @@ export const AssetsGroup = ({group}) => {
                     switch(asset.constructor) {
                         case Group: return <AssetsGroup group={asset} />
                         case Color: return <ColorRow color={asset} />
+                        case TextStyle: return <TextStyleRow textStyle={asset} />
                         default: return <h2>Unknown</h2>
                     }
                 })}

@@ -1,0 +1,12 @@
+p.textStyleRow {
+    border-color: #6E6E6E;
+    cursor: pointer;
+}
+
+p.textStyleRow::before {
+    display: none;
+}
+
+p.textStyleRow:hover {
+    opacity: 1 !important;
+}

@@ -6,7 +6,7 @@ export class Group {
     }
 
     addChild(child) {
-        if (this.getChild(child.name) === null) {
+        if (child.name && !(child instanceof Group && this.getChild(child.name) !== null)) {
             this.children.push(child)
         }
     }
@@ -25,8 +25,21 @@ export class Group {
 export class Color {
 
     constructor(name, hex) {
-        this.name = name
+        this.name = name || hex
         this.hex = hex
+    }
+
+}
+
+export class TextStyle {
+
+    constructor(name, style) {
+        this.name = name || `${style.fontFamily} ${style.fontSize} ${style.fontStyle}`
+        this.style = style
+    }
+
+    getHex() {
+        return this.style.fill.toHex()
     }
 
 }

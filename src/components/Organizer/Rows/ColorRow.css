@@ -1,6 +1,7 @@
 p.colorRow {
     border-left: 8px solid red;
     position: relative;
+    cursor: pointer;
 }
 
 p.colorRow::before {
