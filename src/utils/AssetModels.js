@@ -43,3 +43,12 @@ export class TextStyle {
     }
 
 }
+
+export class Symbol {
+
+    constructor(name, masterSymbol) {
+        this.name = name
+        this.infos = masterSymbol
+    }
+
+}

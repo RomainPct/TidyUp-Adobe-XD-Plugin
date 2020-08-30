@@ -2,8 +2,8 @@ const React = require('react')
 const styles = require('./App.css')
 
 const assets = require('assets')
-const { Text } = require('scenegraph')
-const { Group, Color, TextStyle } = require('../utils/AssetModels')
+const { Text, SymbolInstance, Artboard, Group:AdobeGroup } = require('scenegraph')
+const { Group, Color, TextStyle, Symbol } = require('../utils/AssetModels')
 
 const { NavigationBar } = require('./Nav/NavigationBar')
 const { OrganizerView } = require('./Organizer/OrganizerView')
@@ -11,12 +11,15 @@ const { OrganizerView } = require('./Organizer/OrganizerView')
 class App extends React.Component {
     constructor(props) {
         super(props);
-        
+
+        this.defaultSection = props.defaultSection
+
         this.state = {
             documentRoot  : null,
             selection     : null,
             colorAssets: null,
             fontStyles: null,
+            symbols: null,
             currentSection: 0
         };
         
@@ -64,23 +67,52 @@ class App extends React.Component {
         })
         return colorAssets
     }
+
+    iterateThroughElements(elements, addElement) {
+        elements.forEach(elem => {
+            if (elem instanceof SymbolInstance && elem.isMaster) {
+                addElement(elem)
+                this.iterateThroughElements(elem.children, addElement)
+            }
+            if (elem.children.length > 0) {
+                this.iterateThroughElements(elem.children, addElement)
+            }
+        })
+    }
+
+    getOrderedSymbols(documentRoot) {
+        let selectedSymbols = []
+        this.iterateThroughElements(documentRoot.children, elem => { selectedSymbols.push(elem) })
+        const symbols = this.orderAssets(selectedSymbols, (symbol, name = null) =>  new Symbol(name, symbol) )
+        console.log(symbols)
+        return symbols
+    }
+
+    defineSelectedSection(selection) {
+        if (this.defaultSection !== null) {
+            return this.defaultSection
+        }
+        this.defaultSection = null
+        if (selection.items.length == 0) {
+            return 2
+        }
+        if (selection.items[0] instanceof Text) {
+            return 1
+        }
+        return 0
+    }
     
     documentStateChanged(selection, documentRoot) {
         console.log(`======> documentStateChanged`)
-        let currentSection
-        if (selection.items.length == 0) {
-            currentSection = 2
-        } else if (selection.items[0] instanceof Text) {
-            currentSection = 1
-        } else {
-            currentSection = 0
-        }
+        const currentSection = this.defineSelectedSection(selection)
         const colorAssets = this.getOrderedColorAssets()
         const fontStyles = this.getOrderedFontStyles()
-        this.setState({ documentRoot, selection, colorAssets, fontStyles, currentSection })
+        const symbols = this.getOrderedSymbols(documentRoot)
+        this.setState({ documentRoot, selection, colorAssets, fontStyles, currentSection, symbols })
     }
 
     handleNavigationTo = (index) => {
+        this.defaultSection = null
         this.setState({
             ...this.state,
             currentSection: index

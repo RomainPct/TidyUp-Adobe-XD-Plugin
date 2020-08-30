@@ -38,10 +38,30 @@
       "height" : 192
     }
   ],
-  "uiEntryPoints": [{
-    "type": "panel",
-    "label": "TidyUp - Components Organizer",
-    "panelId": "organizerPanel",
-    "shortcut": {"mac": "Cmd+Alt+T", "win": "Ctrl+Alt+T"}
-  }]
+  "uiEntryPoints": [
+    {
+      "type": "panel",
+      "label": "AutoOrganizer",
+      "panelId": "organizerPanel",
+      "shortcut": {"mac": "Cmd+Ctrl+1", "win": "Ctrl+1"}
+    },
+    {
+      "type": "panel",
+      "label": "Colors",
+      "panelId": "colorOrganizerPanel",
+      "shortcut": {"mac": "Cmd+Ctrl+2", "win": "Ctrl+2"}
+    },
+    {
+      "type": "panel",
+      "label": "TextStyles",
+      "panelId": "textStylesOrganizerPanel",
+      "shortcut": {"mac": "Cmd+Ctrl+3", "win": "Ctrl+3"}
+    },
+    {
+      "type": "panel",
+      "label": "Components",
+      "panelId": "componentsOrganizerPanel",
+      "shortcut": {"mac": "Cmd+Ctrl+4", "win": "Ctrl+4"}
+    }
+  ]
 }

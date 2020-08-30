@@ -3,11 +3,12 @@ const ReactDOM = require('react-dom');
 
 
 class OrganizerPanel {
-  constructor(App) {
+  constructor(App, defaultSection = null) {
     this.App = App;
     this.instance = null;
     this.rootNode = document.createElement('div');
     this.attachment = null;
+    this.defaultSection = defaultSection;
 
     ['show', 'hide', 'update'].forEach((fn) =>
       this[fn] = this[fn].bind(this)
@@ -22,7 +23,7 @@ class OrganizerPanel {
     this.attachment.appendChild(this.rootNode);
 
     if (!this.instance) {
-      this.instance = ReactDOM.render(<App />, this.rootNode);
+      this.instance = ReactDOM.render(<App defaultSection={this.defaultSection} />, this.rootNode);
     }
 
     this.update(selection, root);
