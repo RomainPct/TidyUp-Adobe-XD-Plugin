@@ -1,0 +1,12 @@
+p.symbolRow {
+    /* border-color: #6E6E6E; */
+    cursor: pointer;
+}
+
+p.symbolRow::before {
+    background: #1592E5;
+}
+
+p.symbolRow:hover {
+    opacity: 1 !important;
+}

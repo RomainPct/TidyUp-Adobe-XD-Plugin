@@ -128,7 +128,7 @@ class App extends React.Component {
                     <div className="main-content-wrapper">
                         {this.state.currentSection == 0 ? <OrganizerView type="0" assets={this.state.colorAssets} /> : ''}
                         {this.state.currentSection == 1 ? <OrganizerView type="1" assets={this.state.fontStyles} /> : ''}
-                        {this.state.currentSection == 2 ? <OrganizerView type="2" /> : ''}
+                        {this.state.currentSection == 2 ? <OrganizerView type="2" assets={this.state.symbols} /> : ''}
                     </div>
                 </div>
             </panel>
