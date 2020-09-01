@@ -47,6 +47,7 @@ class App extends React.Component {
                 orderedAssets.getChild('NotNamed').addChild(generateAssetCallback(asset))
             }
         })
+        orderedAssets.reorder()
         return orderedAssets
     }
 
@@ -84,7 +85,6 @@ class App extends React.Component {
         let selectedSymbols = []
         this.iterateThroughElements(documentRoot.children, elem => { selectedSymbols.push(elem) })
         const symbols = this.orderAssets(selectedSymbols, (symbol, name = null) =>  new Symbol(name, symbol) )
-        console.log(symbols)
         return symbols
     }
 

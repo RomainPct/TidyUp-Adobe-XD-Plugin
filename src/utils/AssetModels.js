@@ -29,6 +29,18 @@ export class Group extends AssetBase {
         return null
     }
 
+    reorder() {
+        this.children.sort((a, b) => {
+            if (a instanceof Group && !(b instanceof Group) )  return -1
+            if (a.name > b.name) return -1
+            if (a.name > b.name) return 1
+            return 0
+        })
+        this.children.forEach(child => {
+            if (child instanceof Group) child.reorder()
+        })
+    }
+
 }
 
 export class Color extends AssetBase {
