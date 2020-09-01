@@ -13,10 +13,10 @@ export const OrganizerView = ({ assets = {}}) => {
         <div className="organizerView">
             {((assets || {}).children || []).map(function(asset) {
                 switch(asset.constructor) {
-                    case Group: return <AssetsGroup key={asset.name} group={asset} />
-                    case Color: return <ColorRow key={asset.name} color={asset} />
-                    case TextStyle: return <TextStyleRow key={asset.name} textStyle={asset} />
-                    case Symbol: return <SymbolRow key={asset.name} symbol={asset} />
+                    case Group: return <AssetsGroup key={asset.id} group={asset} />
+                    case Color: return <ColorRow key={asset.id} color={asset} />
+                    case TextStyle: return <TextStyleRow key={asset.id} textStyle={asset} />
+                    case Symbol: return <SymbolRow key={asset.id} symbol={asset} />
                     default: return <h2>Unknown</h2>
                 }
             })}

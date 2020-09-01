@@ -1,6 +1,15 @@
-export class Group {
+export class AssetBase {
+
+    constructor(fullname, type) {
+        this.id = `${fullname}_${type}`
+    }
+
+}
+
+export class Group extends AssetBase {
 
     constructor(name) {
+        super(name, 'group')
         this.name = name
         this.children = []
     }
@@ -22,19 +31,22 @@ export class Group {
 
 }
 
-export class Color {
+export class Color extends AssetBase {
 
     constructor(name, hex) {
+        super(name, 'color')
         this.name = name || hex
         this.hex = hex
     }
 
 }
 
-export class TextStyle {
+export class TextStyle extends AssetBase {
 
     constructor(name, style) {
-        this.name = name || `${style.fontFamily} ${style.fontSize} ${style.fontStyle}`
+        const textStyleName = name || `${style.fontFamily} ${style.fontSize} ${style.fontStyle}`
+        super(textStyleName, 'textstyle')
+        this.name = textStyleName
         this.style = style
     }
 
@@ -44,9 +56,10 @@ export class TextStyle {
 
 }
 
-export class Symbol {
+export class Symbol extends AssetBase {
 
     constructor(name, masterSymbol) {
+        super(masterSymbol.name, 'mastersymbol')
         this.name = name
         this.infos = masterSymbol
     }
