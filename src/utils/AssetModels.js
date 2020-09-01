@@ -1,7 +1,15 @@
 export class AssetBase {
 
-    constructor(fullname, type) {
-        this.id = `${fullname}_${type}`
+    constructor(asset, type) {
+        const stringifiedAsset = JSON.stringify(asset)
+        let hash = 0, i, chr
+        for (i = 0; i < stringifiedAsset.length; i++) {
+            chr   = stringifiedAsset.charCodeAt(i)
+            hash  = ((hash << 5) - hash) + chr
+            hash |= 0 // Convert to 32bit integer
+        }
+        this.id = `${hash}_${type}`
+        console.log(this.id)
     }
 
 }
@@ -45,21 +53,20 @@ export class Group extends AssetBase {
 
 export class Color extends AssetBase {
 
-    constructor(name, hex) {
-        super(name, 'color')
-        this.name = name || hex
-        this.hex = hex
+    constructor(name, color) {
+        super(color, 'color')
+        this.hex = color.color.toHex()
+        this.name = name || this.hex
     }
 
 }
 
 export class TextStyle extends AssetBase {
 
-    constructor(name, style) {
-        const textStyleName = name || `${style.fontFamily} ${style.fontSize} ${style.fontStyle}`
-        super(textStyleName, 'textstyle')
-        this.name = textStyleName
-        this.style = style
+    constructor(name, fs) {
+        super(fs, 'textstyle')
+        this.name = name || `${fs.style.fontFamily} ${fs.style.fontSize} ${fs.style.fontStyle}`
+        this.style = fs.style
     }
 
     getHex() {
@@ -71,7 +78,7 @@ export class TextStyle extends AssetBase {
 export class Symbol extends AssetBase {
 
     constructor(name, masterSymbol) {
-        super(masterSymbol.name, 'mastersymbol')
+        super(masterSymbol, 'mastersymbol')
         this.name = name
         this.infos = masterSymbol
     }

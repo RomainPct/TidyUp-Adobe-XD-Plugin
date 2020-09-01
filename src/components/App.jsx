@@ -44,7 +44,7 @@ class App extends React.Component {
                 }
             } else {
                 orderedAssets.addChild(new Group('NotNamed'))
-                orderedAssets.getChild('NotNamed').addChild(generateAssetCallback(asset))
+                orderedAssets.getChild('NotNamed').addChild(generateAssetCallback(asset, null))
             }
         })
         orderedAssets.reorder()
@@ -52,21 +52,17 @@ class App extends React.Component {
     }
 
     getOrderedFontStyles() {
-        const fontStyles = this.orderAssets(assets.characterStyles.get(), (fontStyle, name = null) => {
-            return new TextStyle(name, fontStyle.style)
-        })
-        return fontStyles
+        return this.orderAssets(assets.characterStyles.get(), (fs, name) => new TextStyle(name, fs) )
     }
 
     getOrderedColorAssets() {
-        const colorAssets = this.orderAssets(assets.colors.get(), (color, name = null) => {
-            if (color.gradientType) {
-                return {}
-            } else {
-                return new Color(name, color.color.toHex())
-            }
-        })
-        return colorAssets
+        return this.orderAssets(assets.colors.get(), (color, name) => color.gradientType ? {} : new Color(name, color))
+    }
+
+    getOrderedSymbols(documentRoot) {
+        let selectedSymbols = []
+        this.iterateThroughElements(documentRoot.children, elem => { selectedSymbols.push(elem) })
+        return this.orderAssets(selectedSymbols, (symbol, name) =>  new Symbol(name, symbol) )
     }
 
     iterateThroughElements(elements, addElement) {
@@ -81,24 +77,11 @@ class App extends React.Component {
         })
     }
 
-    getOrderedSymbols(documentRoot) {
-        let selectedSymbols = []
-        this.iterateThroughElements(documentRoot.children, elem => { selectedSymbols.push(elem) })
-        const symbols = this.orderAssets(selectedSymbols, (symbol, name = null) =>  new Symbol(name, symbol) )
-        return symbols
-    }
-
     defineSelectedSection(selection) {
-        if (this.defaultSection !== null) {
-            return this.defaultSection
-        }
+        if (this.defaultSection !== null) return this.defaultSection
         this.defaultSection = null
-        if (selection.items.length == 0) {
-            return 2
-        }
-        if (selection.items[0] instanceof Text) {
-            return 1
-        }
+        if (selection.items.length == 0) return 2
+        if (selection.items[0] instanceof Text) return 1
         return 0
     }
     
