@@ -9,6 +9,7 @@ const { NavigationBar } = require('./Nav/NavigationBar')
 const { OrganizerView } = require('./Organizer/OrganizerView')
 
 class App extends React.Component {
+    
     constructor(props) {
         super(props);
 

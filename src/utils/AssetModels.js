@@ -55,6 +55,7 @@ export class Color extends AssetBase {
 
     constructor(name, color) {
         super(color, 'color')
+        this.color = color.color
         this.hex = color.color.toHex()
         this.name = name || this.hex
     }
