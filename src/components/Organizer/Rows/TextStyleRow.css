@@ -6,7 +6,3 @@ p.textStyleRow {
 p.textStyleRow::before {
     display: none;
 }
-
-p.textStyleRow:hover {
-    opacity: 1 !important;
-}

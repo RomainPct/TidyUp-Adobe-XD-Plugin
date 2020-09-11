@@ -15,6 +15,7 @@ p.row {
 
 p.row:hover {
     background: #E8E8E8;
+    opacity: 1 !important;
 }
 
 p.row::before {

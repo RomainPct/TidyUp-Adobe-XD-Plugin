@@ -9,7 +9,7 @@ export class AssetBase {
             hash |= 0 // Convert to 32bit integer
         }
         this.id = `${hash}_${type}`
-        console.log(this.id)
+        // console.log(this.id)
     }
 
 }

@@ -1,20 +1,18 @@
 .assetsGroup {
     position: relative;
 }
-.assetsGroup.open {
-    /* background: purple; */
-}
 
 .childrenContainer {
     position: absolute;
     display: none;
     top: 100%;
-    left: 12px;
+    left: 16px;
     right: 0;
     flex-direction: column-reverse;
     background: #f7f7f7;
-    /* background: yellow; */
 }
+
+/* Hover managment */
 
 .organizerView:hover .assetsGroup:hover {
     opacity: 1;
