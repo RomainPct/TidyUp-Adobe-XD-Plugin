@@ -1,7 +1,7 @@
 export class AssetBase {
 
     constructor(asset, type) {
-        const stringifiedAsset = JSON.stringify(asset)
+        const stringifiedAsset = type == 'mastersymbol' ? asset.name : JSON.stringify(asset)
         let hash = 0, i, chr
         for (i = 0; i < stringifiedAsset.length; i++) {
             chr   = stringifiedAsset.charCodeAt(i)
@@ -9,7 +9,6 @@ export class AssetBase {
             hash |= 0 // Convert to 32bit integer
         }
         this.id = `${hash}_${type}`
-        // console.log(this.id)
     }
 
 }

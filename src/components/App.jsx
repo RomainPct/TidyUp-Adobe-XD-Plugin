@@ -70,7 +70,6 @@ class App extends React.Component {
         elements.forEach(elem => {
             if (elem instanceof SymbolInstance && elem.isMaster) {
                 addElement(elem)
-                this.iterateThroughElements(elem.children, addElement)
             }
             if (elem.children.length > 0) {
                 this.iterateThroughElements(elem.children, addElement)
