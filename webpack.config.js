@@ -11,7 +11,8 @@ module.exports = {
     scenegraph: "scenegraph",
     viewport: "viewport",
     uxp: "uxp",
-    assets: "assets"
+    assets: "assets",
+    commands: "commands"
   },
   resolve: {
     extensions: [".js", ".jsx"]

@@ -1,7 +1,7 @@
 export class AssetBase {
 
     constructor(asset, type) {
-        const stringifiedAsset = type == 'mastersymbol' ? asset.name : JSON.stringify(asset)
+        const stringifiedAsset = type == 'mastersymbol' ? asset.symbolId : JSON.stringify(asset)
         let hash = 0, i, chr
         for (i = 0; i < stringifiedAsset.length; i++) {
             chr   = stringifiedAsset.charCodeAt(i)
@@ -80,7 +80,7 @@ export class Symbol extends AssetBase {
     constructor(name, masterSymbol) {
         super(masterSymbol, 'mastersymbol')
         this.name = name
-        this.infos = masterSymbol
+        this.instance = masterSymbol
     }
 
 }
