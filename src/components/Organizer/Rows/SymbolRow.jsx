@@ -32,13 +32,13 @@ export const SymbolRow = ({ symbol = new Symbol('unknown', {}) }) => {
                 console.log(`-> single original selection`)
                 console.log(newInstance.children)
                 const children = newInstance.children
-                newInstance.removeAllChildren()
+                // newInstance.removeAllChildren()
                 originalSelectionItems[0].addChild(newInstance)
-                console.log(children)
-                children.forEach(child => {
-                    console.log(`add child ${child}`)
-                    newInstance.addChild(child)
-                })
+                // console.log(children)
+                // children.forEach(child => {
+                //     console.log(`add child ${child}`)
+                //     newInstance.addChild(child)
+                // })
             } else {
                 console.log(`-> multiple original selection`)
             }
